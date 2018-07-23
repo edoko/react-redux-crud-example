@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import "./item.css";
 
 class Item extends Component {
   constructor(props) {
@@ -43,7 +47,7 @@ class Item extends Component {
   // 삼항연산자를 쓰기 위해 input 태그를 따로 생성.
   renderTitleInput = () => {
     return (
-      <input
+      <TextField
         onChange={this.handleChangeTitle}
         defaultValue={this.props.title}
         type="text"
@@ -54,7 +58,7 @@ class Item extends Component {
 
   renderContentInput = () => {
     return (
-      <input
+      <TextField
         onChange={this.handleChangeContent}
         defaultValue={this.props.content}
         type="text"
@@ -65,26 +69,40 @@ class Item extends Component {
 
   // 마찬가지로 삼항연산자를 사용하기 위해 따로 생성.
   renderUpdateButton = () => {
-    return <button onClick={this.updatePost}>EDIT</button>;
+    return (
+      <Button variant="contained" color="primary" onClick={this.updatePost}>
+        EDIT
+      </Button>
+    );
   };
 
   renderDoneButton = () => {
-    return <button onClick={this.donePost}>DONE</button>;
+    return (
+      <Button variant="contained" onClick={this.donePost}>
+        DONE
+      </Button>
+    );
   };
 
   render() {
-    console.log(this.props);
     return (
-      <li>
+      <Grid item xs={12} className="item">
         {/* isEdit이 true일 경우, renderTitleInput이, 아닐 경우 this.props.title을 출력 (아래도 동일) */}
-        {this.state.isEdit ? this.renderTitleInput() : this.props.title}
+        {this.state.isEdit ? this.renderTitleInput() : this.props.title + `: `}
         {this.state.isEdit ? this.renderContentInput() : this.props.content}
         <br />
         {this.state.isEdit
           ? this.renderDoneButton()
           : this.renderUpdateButton()}
-        <button onClick={this.removePost}>REMOVE</button>
-      </li>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={this.removePost}
+          className="btn_remove"
+        >
+          REMOVE
+        </Button>
+      </Grid>
     );
   }
 }

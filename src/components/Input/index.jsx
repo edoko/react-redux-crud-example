@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import "./index.css";
 
 class Input extends Component {
   constructor(props) {
@@ -29,23 +33,26 @@ class Input extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          onChange={this.handleChangeTitle}
-          value={this.state.title}
-          type="text"
-          placeholder="Add title"
-          required
-        />
-        <input
-          onChange={this.handleChangeContent}
-          value={this.state.content}
-          type="text"
-          placeholder="Add content"
-          required
-        />
-        <button type="submit">Add</button>
-      </form>
+      <Grid item xs={12} className="form">
+        <form onSubmit={this.handleSubmit}>
+          <TextField
+            onChange={this.handleChangeTitle}
+            value={this.state.title}
+            type="text"
+            placeholder="Add title"
+            required
+          />
+          <br />
+          <TextField
+            onChange={this.handleChangeContent}
+            value={this.state.content}
+            type="text"
+            placeholder="Add content"
+            required
+          />
+          <Button type="submit">Add</Button>
+        </form>
+      </Grid>
     );
   }
 }
