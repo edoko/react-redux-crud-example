@@ -16,13 +16,11 @@ class Input extends Component {
     };
   }
 
-  // handleChange* 는 input에 text를 입력했을 때 각 state에 집어넣음
-  handleChangeTitle = event => {
-    this.setState({ title: event.target.value });
-  };
-
-  handleChangeContent = event => {
-    this.setState({ content: event.target.value });
+  // handleChange 는 input에 text를 입력했을 때 각 state에 집어넣음
+  handleChange = event => {
+    const state = this.state;
+    state[event.target.name] = event.target.value;
+    this.setState({ state });
   };
 
   // submit 했을 시, props.addPost를 실행
@@ -36,18 +34,20 @@ class Input extends Component {
       <Grid item xs={12} className="form">
         <form onSubmit={this.handleSubmit}>
           <TextField
-            onChange={this.handleChangeTitle}
+            onChange={this.handleChange}
             value={this.state.title}
             type="text"
             placeholder="Add title"
+            name="title"
             required
           />
           <br />
           <TextField
-            onChange={this.handleChangeContent}
+            onChange={this.handleChange}
             value={this.state.content}
             type="text"
             placeholder="Add content"
+            name="content"
             required
           />
           <Button type="submit">Add</Button>
